@@ -3,6 +3,7 @@ package com.xzfw.app.controller;
 import com.xzfw.app.entity.User;
 import com.xzfw.app.myException.MyServerException;
 import com.xzfw.app.server.UserServer;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpSession;
@@ -23,11 +24,12 @@ public class UserController {
     /**
      * 用户通过手机号码登陆
      */
+    @PostMapping(value = "/login")
     public Object loginByIphone(HttpSession session, User user){
         Map<String,String> map = new HashMap<String,String>();
         //判断用户数据是否存在
         if (user == null){
-            map.put("error","数据异常");
+            throw new RuntimeException("数据异常");
         }else {
             //处理异常
             try {
@@ -35,14 +37,8 @@ public class UserController {
                 //登陆成功把从数据库取出的用户信息放入session中
                 session.setAttribute("user",user);
                 map.put("result","success");
-            } catch (MyServerException.iphoneEmptyException e) {
-                map.put("error",e.getMessage());
-            } catch (MyServerException.passWordEmptyException e){
-                map.put("error",e.getMessage());
-            } catch (MyServerException.userNotException e){
-                map.put("error",e.getMessage());
-            }catch (MyServerException.passWordWrongException e){
-                map.put("error",e.getMessage());
+            } catch (RuntimeException e) {
+                throw e;
             }
         }
         return map;
