@@ -1,12 +1,17 @@
 package com.xzfw.app.server.impl;
 
+import com.mysql.jdbc.MysqlDataTruncation;
 import com.xzfw.app.dao.UserDao;
 import com.xzfw.app.entity.User;
 import com.xzfw.app.myException.MyServerException;
 import com.xzfw.app.server.UserServer;
+import com.xzfw.app.util.AccountValidatorUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * 用户server层接口实现类
@@ -41,6 +46,28 @@ public class UserServerImpl implements UserServer {
             throw new MyServerException.passWordWrongException("登陆失败，密码错误");
         }
         return user;
+    }
+
+    @Transactional(rollbackFor = Exception.class, readOnly = false)
+    @Override
+    public Integer RegisterByUser(User user) {
+        //判断用户名是否正确
+        //调用正则方法抛出异常
+        if(!AccountValidatorUtil.isUsername(user.getUserName())){
+            throw new MyServerException.userException("你的用户名出现错误");
+        }
+
+        //判断是否为手机号码
+        if(!AccountValidatorUtil.isMobile(user.getIphone())){
+            throw new MyServerException.phoneNumberException("输入的手机号码不正确");
+        }
+
+        //用户密码异常
+        if(AccountValidatorUtil.isPassword(user.getPassWord())){
+            throw new MyServerException.passWordException("你输入的密码有误");
+        }
+        //向数据库插入用户
+        return userDao.insertUser(user);
     }
 
 }
