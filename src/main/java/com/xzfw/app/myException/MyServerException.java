@@ -1,5 +1,7 @@
 package com.xzfw.app.myException;
 
+import java.util.function.Supplier;
+
 /**
  * 自定义异常,server层异常
  */
@@ -71,6 +73,50 @@ public class MyServerException extends RuntimeException {
         }
     }
 
+    /**
+     * 手机号码异常
+     * @author 苏鹏翔
+     */
+    public static class phoneNumberException extends RuntimeException{
 
+        private static final long serialVersionUID = -7044155411201180659L;
+
+        public phoneNumberException(String message){
+            super(message);
+        }
+    }
+    /**
+     * 用户名异常
+     */
+    public static class userException extends RuntimeException{
+
+        private static final long serialVersionUID = 7738970485524440017L;
+
+        public userException (String messge){
+            super(messge);
+        }
+    }
+    /**
+     * 用户密码异常
+     */
+    public static class passWordException extends RuntimeException{
+
+        private static final long serialVersionUID = -1704815637056470939L;
+
+        public passWordException(String messge){
+            super(messge);
+        }
+    }
+    /**
+     * 短信次数超出异常
+     */
+    public static class messageNumOutException extends RuntimeException{
+
+        private static final long serialVersionUID = -8916226308118016769L;
+
+        public messageNumOutException(String messge){
+            super(messge);
+        }
+    }
 
 }
