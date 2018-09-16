@@ -14,4 +14,10 @@ public interface UserServer {
      */
     User LoginByIphone(User user);
 
+    /**
+     * 注册用户
+     * @author 苏鹏翔
+     */
+    Integer RegisterByUser(User user);
+
 }
