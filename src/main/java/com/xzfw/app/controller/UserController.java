@@ -19,9 +19,9 @@ import java.util.Random;
  * 用户控制层
  * @author 刘靖
  */
-
 @RestController
 public class UserController {
+
     //存放手机验证码
     private Map<String,Integer> phoneMap = new HashMap<String,Integer>();
 
@@ -51,27 +51,29 @@ public class UserController {
         return map;
     }
 
-    @RequestMapping(value = "/sendCode")
+    /**
+     * 短信验证码发送
+     * @param session
+     * @param iphone
+     * @return
+     */
+    @PostMapping(value = "/sendCode")
     public Object sendCode(HttpSession session,String iphone){
         Integer num = phoneMap.get(iphone);
-
         //判断短信是否达到次数
         if(num != null){
             if (num >=3){
                 throw new MyServerException.messageNumOutException("你的短信次数达到限制");
             }
         }
-
         //随机产生验证码
         Random r = new Random(new Date().getTime());
         String code = "";
         for (int i = 0; i < 4; i++) {
             code += r.nextInt(10);
         }
-
         //发送短信
         String result = SmsMessage.SendSmsMEssage(iphone,code);
-
         if("1".equals(result)){
             //判断手机号码是否被记录
             if(phoneMap.containsKey(iphone)){
@@ -85,16 +87,36 @@ public class UserController {
         session.setAttribute(iphone,code);
         Map map = new HashMap();
         map.put("result","success");
-
         return map;
     }
 
     /**
-     *注册用户
+     * 注册用户
      */
-    public Object register(User user,String code){
-
-        return null;
+    @PostMapping(value = "/register")
+    public Object register(HttpSession session,User user,String code){
+        //判断用不为空
+        if(user == null){
+            throw new MyServerException.userNotException("数据异常");
+        }
+        //比对验证码
+        if(!code.equals(session.getAttribute(user.getIphone()))){
+            throw new MyServerException.phoneCodeErrorException("验证码错误");
+        }
+        Integer result = 0;
+        try {
+            //注册
+            result = userServer.RegisterByUser(user);
+        }catch (RuntimeException e){
+            throw e;
+        }
+        //判断是否插入成功
+        if(result != 1){
+            throw new MyServerException.userExistException("用户已经存在");
+        }
+        Map<String, String> map = new HashMap<String, String>();
+        map.put("result","success");
+        return map;
     }
 
 }
