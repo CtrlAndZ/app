@@ -25,11 +25,6 @@ public class User {
     private String iphone;
 
     /**
-     * 收货信息
-     */
-    private List<Consignee> consignee;
-
-    /**
      * 用户密码
      */
     private String passWord;
@@ -68,14 +63,6 @@ public class User {
         this.iphone = iphone;
     }
 
-    public List<Consignee> getConsignee() {
-        return consignee;
-    }
-
-    public void setConsignee(List<Consignee> consignee) {
-        this.consignee = consignee;
-    }
-
     public String getPassWord() {
         return passWord;
     }
@@ -106,7 +93,6 @@ public class User {
                 "userId=" + userId +
                 ", userName='" + userName + '\'' +
                 ", iphone='" + iphone + '\'' +
-                ", consignee=" + consignee +
                 ", passWord='" + passWord + '\'' +
                 ", tsPassword='" + tsPassword + '\'' +
                 ", headUrl='" + headUrl + '\'' +
