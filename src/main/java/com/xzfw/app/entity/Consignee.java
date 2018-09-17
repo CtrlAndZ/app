@@ -6,19 +6,24 @@ package com.xzfw.app.entity;
  */
 public class Consignee {
     /**
+     * 所属用户
+     */
+    private User User;
+
+    /**
      * 收货ID
      */
-    private Integer id;
+    private Integer csnId;
 
     /**
      *收货姓名
      */
-    private String userName;
+    private String csnName;
 
     /**
      * 收货人手机号
      */
-    private String number;
+    private String csnNumber;
 
     /**
      * 所在省
@@ -51,28 +56,37 @@ public class Consignee {
     private String mail;
 
 
-    public Integer getId() {
-        return id;
+    public com.xzfw.app.entity.User getUser() {
+        return User;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setUser(com.xzfw.app.entity.User user) {
+        User = user;
     }
 
-    public String getUserName() {
-        return userName;
+
+    public Integer getCsnId() {
+        return csnId;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setCsnId(Integer csnId) {
+        this.csnId = csnId;
     }
 
-    public String getNumber() {
-        return number;
+    public String getCsnName() {
+        return csnName;
     }
 
-    public void setNumber(String number) {
-        this.number = number;
+    public void setCsnName(String csnName) {
+        this.csnName = csnName;
+    }
+
+    public String getCsnNumber() {
+        return csnNumber;
+    }
+
+    public void setCsnNumber(String csnNumber) {
+        this.csnNumber = csnNumber;
     }
 
     public String getProvince() {
@@ -126,9 +140,10 @@ public class Consignee {
     @Override
     public String toString() {
         return "Consignee{" +
-                "id=" + id +
-                ", userName='" + userName + '\'' +
-                ", number='" + number + '\'' +
+                "User=" + User +
+                ", csnId=" + csnId +
+                ", csnName='" + csnName + '\'' +
+                ", csnNumber='" + csnNumber + '\'' +
                 ", province='" + province + '\'' +
                 ", city='" + city + '\'' +
                 ", county='" + county + '\'' +
