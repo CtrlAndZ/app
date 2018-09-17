@@ -119,4 +119,29 @@ public class MyServerException extends RuntimeException {
         }
     }
 
+    /**
+     * 验证错误异常
+     */
+    public static class phoneCodeErrorException extends RuntimeException {
+
+        private static final long serialVersionUID = -3638702188090070475L;
+
+        public phoneCodeErrorException(String message) {
+            super(message);
+        }
+    }
+
+    /**
+     * 注册时用户已经存在异常
+     */
+    public static class userExistException extends RuntimeException {
+
+        private static final long serialVersionUID = -7814109098659411533L;
+
+        public userExistException(String message){
+            super(message);
+        }
+    }
+
+
 }
