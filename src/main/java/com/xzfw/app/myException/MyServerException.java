@@ -154,5 +154,17 @@ public class MyServerException extends Exception {
         }
     }
 
+    /**
+     * 商品添加失败异常
+     */
+    public static class articleIssueException extends RuntimeException {
+
+        private static final long serialVersionUID = -1844813049896924422L;
+
+        public articleIssueException(String message){
+            super(message);
+        }
+    }
+
 
 }
