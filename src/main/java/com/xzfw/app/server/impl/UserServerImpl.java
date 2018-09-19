@@ -1,6 +1,5 @@
 package com.xzfw.app.server.impl;
 
-import com.mysql.jdbc.MysqlDataTruncation;
 import com.xzfw.app.dao.UserDao;
 import com.xzfw.app.entity.User;
 import com.xzfw.app.myException.MyServerException;
@@ -9,9 +8,6 @@ import com.xzfw.app.util.AccountValidatorUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 /**
  * 用户server层接口实现类
