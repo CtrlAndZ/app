@@ -5,6 +5,7 @@ import com.xzfw.app.myException.MyServerException;
 import com.xzfw.app.server.UserServer;
 import com.xzfw.app.util.SmsMessage;
 import org.apache.ibatis.annotations.Mapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -26,6 +27,7 @@ public class UserController {
     private Map<String,Integer> phoneMap = new HashMap<String,Integer>();
 
     //注入userServer
+    @Autowired
     private UserServer userServer;
 
     /**
