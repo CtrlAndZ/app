@@ -20,10 +20,31 @@ import javax.servlet.http.HttpServletResponse;
 @RestControllerAdvice
 public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
+    /**
+     * 运行时异常处理器
+     * @param request
+     * @param e
+     * @param response
+     * @return
+     */
     @ExceptionHandler(RuntimeException.class)
     public ErrorResponseEntity runtimeExceptionHandler(HttpServletRequest request, final Exception e, HttpServletResponse response){
         response.setStatus(HttpStatus.BAD_REQUEST.value());
         RuntimeException exception = (RuntimeException) e;
+        return new ErrorResponseEntity(400,exception.getMessage());
+    }
+
+    /**
+     * 空指针异常处理器
+     * @param request
+     * @param e
+     * @param response
+     * @return
+     */
+    @ExceptionHandler(NullPointerException.class)
+    public ErrorResponseEntity runtimeException(HttpServletRequest request, final  Exception e, HttpServletResponse response){
+        response.setStatus(HttpStatus.BAD_REQUEST.value());
+        NullPointerException exception = (NullPointerException)e;
         return new ErrorResponseEntity(400,exception.getMessage());
     }
 
