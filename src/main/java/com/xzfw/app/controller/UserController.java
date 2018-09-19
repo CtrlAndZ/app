@@ -53,9 +53,6 @@ public class UserController {
 
     /**
      * 短信验证码发送
-     * @param session
-     * @param iphone
-     * @return
      */
     @PostMapping(value = "/sendCode")
     public Object sendCode(HttpSession session,String iphone){
