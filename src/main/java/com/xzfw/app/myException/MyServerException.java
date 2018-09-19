@@ -1,12 +1,11 @@
 package com.xzfw.app.myException;
 
-import java.util.function.Supplier;
 
 /**
  * 自定义异常,server层异常
  */
 
-public class MyServerException extends RuntimeException {
+public class MyServerException extends Exception {
 
     private static final long serialVersionUID = 654396779051184632L;
 
@@ -139,6 +138,18 @@ public class MyServerException extends RuntimeException {
         private static final long serialVersionUID = -7814109098659411533L;
 
         public userExistException(String message){
+            super(message);
+        }
+    }
+
+    /**
+     * 商品属性为空异常
+     */
+    public static class articleNullPointerException extends NullPointerException {
+
+        private static final long serialVersionUID = 6791838797802087391L;
+
+        public articleNullPointerException(String message){
             super(message);
         }
     }
