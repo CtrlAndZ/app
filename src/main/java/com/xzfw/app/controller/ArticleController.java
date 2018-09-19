@@ -30,7 +30,7 @@ public class ArticleController {
      * @param article
      * @return
      */
-    @PostMapping
+    @PostMapping(value = "/issue")
     public Object issueArticle(HttpSession session, Article article){
         //取出用户
         User user = (User) session.getAttribute("user");
