@@ -26,9 +26,6 @@ public class ArticleController {
 
     /**
      * 发布商品
-     * @param session
-     * @param article
-     * @return
      */
     @PostMapping(value = "/issue")
     public Object issueArticle(HttpSession session, Article article){
@@ -48,6 +45,27 @@ public class ArticleController {
         }
         Map<String, String> map = new HashMap<String, String>();
         map.put("result","success");
+        return map;
+    }
+
+    /**
+     * 删除商品
+     * @author 苏鹏翔
+     */
+    public Object deleteArticle (Integer articleId){
+        //判断商品是否为空
+        if(articleId == null){
+            throw new MyServerException.articleIdException("商品ID不能为空");
+        }
+
+        //通过商品ID去判断是否删除成功
+        Integer result = articleServer.deleteByArticleId(articleId);
+        if(result != 1){
+            throw new MyServerException.deleteAricleException("商品删除失败");
+        }
+        Map<String,String> map = new HashMap();
+        map.put("result","success");
+
         return map;
     }
 

@@ -166,5 +166,30 @@ public class MyServerException extends Exception {
         }
     }
 
+    /**
+     * 商品ID为空异常
+     */
+    public static class articleIdException extends RuntimeException{
+
+        private static final long serialVersionUID = 6748946156766569787L;
+
+        public articleIdException(String message){
+            super(message);
+        }
+    }
+
+    /**
+     * 删除商品异常
+     */
+    public static class deleteAricleException extends RuntimeException{
+
+        private static final long serialVersionUID = 903916020854180776L;
+
+        public deleteAricleException(String message){
+
+            super(message);
+        }
+    }
+
 
 }
