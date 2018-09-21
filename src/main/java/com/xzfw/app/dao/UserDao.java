@@ -17,7 +17,7 @@ public interface UserDao {
     /**
      * 通过手机号码查询用户信息
      */
-    @Select("SELECT * FROM T_USER WHRER iphone = #{iphone}")
+    @Select("SELECT * FROM T_USER WHERE iphone = #{iphone}")
     User findByIphone(@Param("iphone") String iphone);
 
     /**
