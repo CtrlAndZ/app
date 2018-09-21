@@ -4,6 +4,7 @@ import com.xzfw.app.dao.ArticleDao;
 import com.xzfw.app.entity.Article;
 import com.xzfw.app.myException.MyServerException;
 import com.xzfw.app.server.ArticleServer;
+import org.apache.ibatis.annotations.Delete;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -50,5 +51,13 @@ public class ArticleServerImpl implements ArticleServer {
         //在数据库中插入一条商品信息
         return articleDao.insertArticle(article);
     }
+
+    @Transactional(rollbackFor = Exception.class, readOnly = false)
+    @Override
+    public Integer deleteByArticleId(Integer articleId) {
+
+        return articleDao.deleteByArticleId(articleId);
+    }
+
 
 }
